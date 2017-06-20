@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ptsa.data &mdash; PTSA 1.1.0 documentation</title>
+  <title>ptsa.data &mdash; PTSA 1.1.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PTSA 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="PTSA 1.1.1 documentation" href="../index.html"/>
         <link rel="up" title="API Reference" href="index.html"/>
         <link rel="next" title="Extension Modules" href="extensions.html"/>
         <link rel="prev" title="API Reference" href="index.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.1.1
               </div>
             
           
@@ -109,7 +109,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
 </ul>
 
             
@@ -226,18 +225,18 @@ leads to some awkwardness: you must pass coords as a dict with a
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<em>array-like</em>) – Time series data</li>
-<li><strong>coords</strong> (<em>dict-like</em>) – Coordinate arrays. This must contain at least a <code class="docutils literal"><span class="pre">samplerate</span></code>
+<li><strong>data</strong> (<em>array-like</em>) &#8211; Time series data</li>
+<li><strong>coords</strong> (<em>dict-like</em>) &#8211; Coordinate arrays. This must contain at least a <code class="docutils literal"><span class="pre">samplerate</span></code>
 coordinate.</li>
-<li><strong>dims</strong> (<em>array-like</em>) – Dimension labels</li>
-<li><strong>name</strong> (<em>str</em>) – Name of the time series</li>
-<li><strong>attrs</strong> (<em>dict</em>) – Dictionary of arbitrary metadata</li>
-<li><strong>encoding</strong> (<em>dict</em>) – </li>
-<li><strong>fastpath</strong> (<em>bool</em>) – Not used, but required when subclassing <code class="xref py py-class docutils literal"><span class="pre">xr.DataArray</span></code>.</li>
+<li><strong>dims</strong> (<em>array-like</em>) &#8211; Dimension labels</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; Name of the time series</li>
+<li><strong>attrs</strong> (<em>dict</em>) &#8211; Dictionary of arbitrary metadata</li>
+<li><strong>encoding</strong> (<em>dict</em>) &#8211; </li>
+<li><strong>fastpath</strong> (<em>bool</em>) &#8211; Not used, but required when subclassing <code class="xref py py-class docutils literal"><span class="pre">xr.DataArray</span></code>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">AssertionError</span></code> – When <code class="docutils literal"><span class="pre">samplerate</span></code> is not present in <code class="docutils literal"><span class="pre">coords</span></code>.</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">AssertionError</span></code> &#8211; When <code class="docutils literal"><span class="pre">samplerate</span></code> is not present in <code class="docutils literal"><span class="pre">coords</span></code>.</p>
 </td>
 </tr>
 </tbody>
@@ -261,7 +260,7 @@ The new series total time duration is:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duration</strong> (<em>float</em>) – Buffer duration in seconds.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duration</strong> (<em>float</em>) &#8211; Buffer duration in seconds.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
 </tr>
@@ -280,8 +279,8 @@ The new series total time duration is:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>other</strong> (<a class="reference internal" href="#ptsa.data.TimeSeriesX.TimeSeriesX" title="ptsa.data.TimeSeriesX.TimeSeriesX"><em>TimeSeriesX</em></a>) – </li>
-<li><strong>dim</strong> (<em>str</em><em> or </em><em>None</em>) – Dimension to concatenate on. If None, attempt to concatenate all
+<li><strong>other</strong> (<a class="reference internal" href="#ptsa.data.TimeSeriesX.TimeSeriesX" title="ptsa.data.TimeSeriesX.TimeSeriesX"><em>TimeSeriesX</em></a>) &#8211; </li>
+<li><strong>dim</strong> (<em>str</em><em> or </em><em>None</em>) &#8211; Dimension to concatenate on. If None, attempt to concatenate all
 data (likely to fail with truly multidimensional data).</li>
 </ul>
 </td>
@@ -306,10 +305,10 @@ for each dimension.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>base_range</strong> (<em>{tuple}</em>) – Tuple specifying the start and end time range (inclusive)
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>base_range</strong> (<em>{tuple}</em>) &#8211; Tuple specifying the start and end time range (inclusive)
 for the baseline.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>ts</strong> – A TimeSeries instance with the baseline corrected data.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>ts</strong> &#8211; A TimeSeries instance with the baseline corrected data.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">{TimeSeries}</td>
 </tr>
@@ -326,7 +325,7 @@ the sample rate as a parameter. See <code class="xref py py-meth docutils litera
 
 <dl class="method">
 <dt id="ptsa.data.TimeSeriesX.TimeSeriesX.filtered">
-<code class="descname">filtered</code><span class="sig-paren">(</span><em>freq_range</em>, <em>filt_type=’stop’</em>, <em>order=4</em><span class="sig-paren">)</span><a class="headerlink" href="#ptsa.data.TimeSeriesX.TimeSeriesX.filtered" title="Permalink to this definition">¶</a></dt>
+<code class="descname">filtered</code><span class="sig-paren">(</span><em>freq_range</em>, <em>filt_type='stop'</em>, <em>order=4</em><span class="sig-paren">)</span><a class="headerlink" href="#ptsa.data.TimeSeriesX.TimeSeriesX.filtered" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filter the data using a Butterworth filter and return a new
 TimeSeries instance.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -334,13 +333,13 @@ TimeSeries instance.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>freq_range</strong> (<em>array-like</em>) – The range of frequencies to filter.</li>
-<li><strong>filt_type</strong> (<em>str</em>) – Filter type (default: <code class="docutils literal"><span class="pre">'stop'</span></code>).</li>
-<li><strong>order</strong> (<em>int</em>) – The order of the filter (default: 4).</li>
+<li><strong>freq_range</strong> (<em>array-like</em>) &#8211; The range of frequencies to filter.</li>
+<li><strong>filt_type</strong> (<em>str</em>) &#8211; Filter type (default: <code class="docutils literal"><span class="pre">'stop'</span></code>).</li>
+<li><strong>order</strong> (<em>int</em>) &#8211; The order of the filter (default: 4).</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ts</strong> – A TimeSeriesX instance with the filtered data.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ts</strong> &#8211; A TimeSeriesX instance with the filtered data.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#ptsa.data.TimeSeriesX.TimeSeriesX" title="ptsa.data.TimeSeriesX.TimeSeriesX">TimeSeriesX</a></p>
@@ -359,7 +358,7 @@ TimeSeries instance.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – Path to HDF5 file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) &#8211; Path to HDF5 file.</td>
 </tr>
 </tbody>
 </table>
@@ -374,14 +373,14 @@ time range.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duration</strong> (<em>float</em>) – The duration to be removed. The units depend on the samplerate:
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duration</strong> (<em>float</em>) &#8211; The duration to be removed. The units depend on the samplerate:
 E.g., if samplerate is specified in Hz (i.e., samples per second),
 the duration needs to be specified in seconds and if samplerate is
 specified in kHz (i.e., samples per millisecond), the duration needs
 to be specified in milliseconds. The specified duration is removed
 from the beginning and end.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>ts</strong> – A TimeSeries instance with the requested durations removed from the
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>ts</strong> &#8211; A TimeSeries instance with the requested durations removed from the
 beginning and/or end.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#ptsa.data.TimeSeriesX.TimeSeriesX" title="ptsa.data.TimeSeriesX.TimeSeriesX">TimeSeriesX</a></td>
@@ -399,11 +398,11 @@ beginning and/or end.</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>resampled_rate</strong> (<em>float</em>) – New sample rate</li>
-<li><strong>window</strong> – ignored for now - added for legacy reasons</li>
-<li><strong>loop_axis</strong> – ignored for now - added for legacy reasons</li>
-<li><strong>num_mp_procs</strong> – ignored for now - added for legacy reasons</li>
-<li><strong>pad_to_pow2</strong> – ignored for now - added for legacy reasons</li>
+<li><strong>resampled_rate</strong> (<em>float</em>) &#8211; New sample rate</li>
+<li><strong>window</strong> &#8211; ignored for now - added for legacy reasons</li>
+<li><strong>loop_axis</strong> &#8211; ignored for now - added for legacy reasons</li>
+<li><strong>num_mp_procs</strong> &#8211; ignored for now - added for legacy reasons</li>
+<li><strong>pad_to_pow2</strong> &#8211; ignored for now - added for legacy reasons</li>
 </ul>
 </td>
 </tr>
@@ -419,21 +418,31 @@ beginning and/or end.</td>
 
 <dl class="method">
 <dt id="ptsa.data.TimeSeriesX.TimeSeriesX.to_hdf">
-<code class="descname">to_hdf</code><span class="sig-paren">(</span><em>filename</em>, <em>mode=’w’</em><span class="sig-paren">)</span><a class="headerlink" href="#ptsa.data.TimeSeriesX.TimeSeriesX.to_hdf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">to_hdf</code><span class="sig-paren">(</span><em>filename</em>, <em>mode='w'</em><span class="sig-paren">)</span><a class="headerlink" href="#ptsa.data.TimeSeriesX.TimeSeriesX.to_hdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save to disk using HDF5.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<em>str</em>) – Full path to the HDF5 file</li>
-<li><strong>mode</strong> (<em>str</em>) – File mode to use. See the <code class="xref py py-mod docutils literal"><span class="pre">h5py</span></code> documentation for details.
+<li><strong>filename</strong> (<em>str</em>) &#8211; Full path to the HDF5 file</li>
+<li><strong>mode</strong> (<em>str</em>) &#8211; File mode to use. See the <code class="xref py py-mod docutils literal"><span class="pre">h5py</span></code> documentation for details.
 Default: <code class="docutils literal"><span class="pre">'w'</span></code></li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Notes</p>
+<p>Because recarrays can complicate things when unicode is involved, saving
+coordinates is a multi-step process:</p>
+<ol class="arabic simple">
+<li>Save to a buffer using <code class="xref py py-func docutils literal"><span class="pre">np.save()</span></code>. This uses Numpy&#8217;s own binary
+format and should Just Work.</li>
+<li>Base64-encode the buffer to eliminate NULL bytes which HDF5 can&#8217;t
+handle.</li>
+<li>Write the bytes contained in the buffer to the HDF5 file.</li>
+</ol>
 </dd></dl>
 
 </dd></dl>
@@ -485,7 +494,7 @@ Default: <code class="docutils literal"><span class="pre">'w'</span></code></li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.0',
+            VERSION:'1.1.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -495,7 +504,7 @@ Default: <code class="docutils literal"><span class="pre">'w'</span></code></li>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

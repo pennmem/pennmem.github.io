@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Extension Modules &mdash; PTSA 1.1.0 documentation</title>
+  <title>Extension Modules &mdash; PTSA 1.1.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PTSA 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="PTSA 1.1.1 documentation" href="../index.html"/>
         <link rel="up" title="API Reference" href="index.html"/>
         <link rel="next" title="Development guidelines" href="../development.html"/>
         <link rel="prev" title="ptsa.data" href="data.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.1.1
               </div>
             
           
@@ -110,7 +110,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
 </ul>
 
             
@@ -223,7 +222,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong><strong>,</strong><strong>Y</strong><strong>,</strong><strong>Z</strong> – np.array[np.complex]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong><strong>,</strong><strong>Y</strong><strong>,</strong><strong>Z</strong> &#8211; np.array[np.complex]</td>
 </tr>
 </tbody>
 </table>
@@ -239,8 +238,8 @@ The computation is performed in parallel over <code class="docutils literal"><sp
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong><strong>,</strong><strong>Y</strong><strong>,</strong><strong>Z</strong> – np.array[np.complex]</li>
-<li><strong>n_threads</strong> – int</li>
+<li><strong>X</strong><strong>,</strong><strong>Y</strong><strong>,</strong><strong>Z</strong> &#8211; np.array[np.complex]</li>
+<li><strong>n_threads</strong> &#8211; int</li>
 </ul>
 </td>
 </tr>
@@ -281,10 +280,10 @@ when partitioned into two classes, and stores the results in fstat.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>phase_diffs</strong> – A matrix of phase differences</li>
-<li><strong>classes</strong> – A boolean vector indicating which observation belongs in which class. Should be the same length as
+<li><strong>phase_diffs</strong> &#8211; A matrix of phase differences</li>
+<li><strong>classes</strong> &#8211; A boolean vector indicating which observation belongs in which class. Should be the same length as
 the first dimension of <code class="docutils literal"><span class="pre">phase_diffs</span></code></li>
-<li><strong>f_stat</strong> – An empty vector the same length as the second dimension of <code class="docutils literal"><span class="pre">phase_diffs</span></code></li>
+<li><strong>f_stat</strong> &#8211; An empty vector the same length as the second dimension of <code class="docutils literal"><span class="pre">phase_diffs</span></code></li>
 </ul>
 </td>
 </tr>
@@ -312,7 +311,7 @@ the first dimension of <code class="docutils literal"><span class="pre">phase_di
 <h2>ptsa.extensions.morlet<a class="headerlink" href="#ptsa-extensions-morlet" title="Permalink to this headline">¶</a></h2>
 <p>Low-level functions for quickly computing Morlet wavelet decompositions.
 <code class="xref py py-mod docutils literal"><span class="pre">MorletWaveletFilterCpp</span></code> provides a higher-level interface for these same functions.</p>
-<span class="target" id="module-ptsa.extensions.morlet"></span></div>
+</div>
 </div>
 
 
@@ -359,7 +358,7 @@ the first dimension of <code class="docutils literal"><span class="pre">phase_di
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.0',
+            VERSION:'1.1.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -369,7 +368,7 @@ the first dimension of <code class="docutils literal"><span class="pre">phase_di
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

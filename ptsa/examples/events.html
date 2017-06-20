@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>BEHAVIORAL ANALYSES &mdash; PTSA 1.1.0 documentation</title>
+  <title>BEHAVIORAL ANALYSES &mdash; PTSA 1.1.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PTSA 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="PTSA 1.1.1 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="pyFR Demo" href="pyFR_demo.html"/>
         <link rel="prev" title="Reading EEG Data from events" href="eeg.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.1.1
               </div>
             
           
@@ -106,7 +106,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filtering Time Series</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
 </ul>
 
             
@@ -380,8 +379,8 @@ dataframes</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">ptsa.data.readers</span> <span class="kn">import</span> <span class="n">BaseEventReader</span>
-<span class="n">rhino_root</span> <span class="o">=</span> <span class="s1">&#39;/Volumes/rhino_root&#39;</span> <span class="c1"># Since I&#39;m writing this tutorial with rhino mounted to my local machine</span>
+<span></span>from ptsa.data.readers import BaseEventReader
+rhino_root = &#39;/Volumes/rhino_root&#39; # Since I&#39;m writing this tutorial with rhino mounted to my local machine
 </pre></div>
 </div>
 </div>
@@ -392,8 +391,8 @@ dataframes</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">events</span> <span class="o">=</span> <span class="n">BaseEventReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">rhino_root</span><span class="o">+</span><span class="s1">&#39;/data/events/pyFR/BW001_events.mat&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">events</span>
+<span></span>events = BaseEventReader(filename=rhino_root+&#39;/data/events/pyFR/BW001_events.mat&#39;).read()
+events
 </pre></div>
 </div>
 </div>
@@ -851,15 +850,15 @@ dataframes</p>
 </pre></div>
 </div>
 </div>
-<p>That’s a lot of information. Let’s try and break down what it all means.</p>
-<p>First of all, what is the type of this object that we’re looking at?</p>
+<p>That&#8217;s a lot of information. Let&#8217;s try and break down what it all means.</p>
+<p>First of all, what is the type of this object that we&#8217;re looking at?</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="nb">type</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+<span></span>type(events)
 </pre></div>
 </div>
 </div>
@@ -874,9 +873,9 @@ dataframes</p>
 </div>
 </div>
 <p>A recarray, or record array, is an array whose columns have labels,
-rahter than indices. It’s how numpy represents tables.</p>
+rahter than indices. It&#8217;s how numpy represents tables.</p>
 <p>The way that numpy does this is by giving the array a composite
-datatype, with a different value for each column. Let’s see what fields
+datatype, with a different value for each column. Let&#8217;s see what fields
 this table has:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
@@ -884,7 +883,7 @@ this table has:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">events</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span>
+<span></span>events.dtype.names
 </pre></div>
 </div>
 </div>
@@ -912,37 +911,37 @@ this table has:</p>
 </div>
 </div>
 <p>Some of these fields (subject, session, list) are pretty
-self-explanatory. Here’s what some of the other fields mean:</p>
+self-explanatory. Here&#8217;s what some of the other fields mean:</p>
 <ul class="simple">
-<li>type : Each event has a “type”, which denotes which part of the
-experiment the event marks. What values “type” can take, and what
+<li>type : Each event has a &#8220;type&#8221;, which denotes which part of the
+experiment the event marks. What values &#8220;type&#8221; can take, and what
 they mean, are indicated below</li>
-<li>item : The word associated with this event. Note that “item” is a
-reserved word in Python, and we’ll need some workarounds to deal with
+<li>item : The word associated with this event. Note that &#8220;item&#8221; is a
+reserved word in Python, and we&#8217;ll need some workarounds to deal with
 that</li>
 <li>itemno : Each word has a number associated with it. This is that
 number</li>
 <li>recalled : Whether the word was recalled or not.</li>
 <li>mstime : The time from epoch that the event took place, in
-milliseconds. “Epoch” here means “7:00 PM Dec 31, 1969”.</li>
+milliseconds. &#8220;Epoch&#8221; here means &#8220;7:00 PM Dec 31, 1969&#8221;.</li>
 <li>rectime : How long it took the subject to recall this word</li>
 <li>intrusion : Whether the recalled word was an intrusion or not. 0
-means “no”, -1 means “extra-list intrusion”, and any other number
+means &#8220;no&#8221;, -1 means &#8220;extra-list intrusion&#8221;, and any other number
 indicates which list the intrusion came from.</li>
 <li>eegfile : The location of the EEG recording associated with this
 event</li>
 <li>eegoffset : The position of this event in the EEG recording, in
 samples</li>
 </ul>
-<p>Let’s see what the different types of event in this experiment are:</p>
+<p>Let&#8217;s see what the different types of event in this experiment are:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+<span></span>import numpy as np
+np.unique(events.type)
 </pre></div>
 </div>
 </div>
@@ -1014,7 +1013,7 @@ samples</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.0',
+            VERSION:'1.1.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1024,7 +1023,7 @@ samples</li>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reading EEG Data from events &mdash; PTSA 1.1.0 documentation</title>
+  <title>Reading EEG Data from events &mdash; PTSA 1.1.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PTSA 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="PTSA 1.1.1 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="BEHAVIORAL ANALYSES" href="events.html"/>
         <link rel="prev" title="Basic TimeSeriesX functionality" href="timeseriesx.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.1.1
               </div>
             
           
@@ -111,7 +111,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filtering Time Series</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
 </ul>
 
             
@@ -382,39 +381,21 @@ and the MonopolarToBipolarMapper, which performs a bipolar rereferencing
 on ECoG data.</p>
 <p>This notebook will go over loading EEG data from the three different CML
 formats.</p>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [1]:
+<span></span>In [4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span> <span class="nn">ptsa.data.readers</span> <span class="kn">import</span> <span class="n">BaseEventReader</span><span class="p">,</span><span class="n">EEGReader</span>
-<span class="kn">from</span> <span class="nn">ptsa.data.readers</span> <span class="kn">import</span> <span class="n">TalReader</span>
-<span class="kn">from</span> <span class="nn">ptsa.data.filters</span> <span class="kn">import</span> <span class="n">MonopolarToBipolarMapper</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="n">rhino_root</span><span class="o">=</span><span class="s1">&#39;/Volumes/rhino_root&#39;</span>
+<span></span>%matplotlib inline
+from ptsa.data.readers import BaseEventReader,EEGReader,CMLEventReader
+from ptsa.data.readers import TalReader
+from ptsa.data.filters import MonopolarToBipolarMapper
+from matplotlib import pyplot as plt
+import numpy as np
+rhino_root=&#39;/Volumes/rhino_root&#39;
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Could not import MorletWaveletFilterCppLegacy (single-core C++ version of MorletWaveletFilter): cannot import name MorletWaveletTransform
-You can still use MorletWaveletFilter
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="stderr output_area docutils container">
-<div class="highlight"><pre>
-/Users/leond/miniconda2/envs/ptsa/lib/python2.7/site-packages/xarray/conventions.py:9: FutureWarning: The pandas.tslib module is deprecated and will be removed in a future version.
-  from pandas.tslib import OutOfBoundsDatetime
-</pre></div></div>
 </div>
 <div class="section" id="1.-pyFR-data-(and-old-RAM-data)">
 <h2>1. pyFR data (and old RAM data)<a class="headerlink" href="#1.-pyFR-data-(and-old-RAM-data)" title="Permalink to this headline">¶</a></h2>
@@ -422,33 +403,33 @@ You can still use MorletWaveletFilter
 <code class="docutils literal"><span class="pre">/data/events/pyFR</span></code>:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [2]:
+<span></span>In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">events</span> <span class="o">=</span> <span class="n">BaseEventReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">rhino_root</span><span class="o">+</span><span class="s1">&#39;/data/events/pyFR/BW001_events.mat&#39;</span><span class="p">,</span><span class="n">use_reref_eeg</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">words</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="n">events</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;WORD&#39;</span><span class="p">]</span>
+<span></span>events = BaseEventReader(filename=rhino_root+&#39;/data/events/pyFR/BW001_events.mat&#39;,use_reref_eeg=False).read()
+words = events[events.type==&#39;WORD&#39;]
 </pre></div>
 </div>
 </div>
-<p>Next, we use the TalReader class to get information about the subject’s
+<p>Next, we use the TalReader class to get information about the subject&#8217;s
 electrodes.</p>
 <p>Like the other readers, the TalReader class has a <code class="docutils literal"><span class="pre">read()</span></code> method that
 will return a record array; this one contains information about the
-location of each electrode. However, we’re really only interested in two
-things: each electrode’s number, and which electrodes are adjacent to
+location of each electrode. However, we&#8217;re really only interested in two
+things: each electrode&#8217;s number, and which electrodes are adjacent to
 each other. Therefore, TalReader has two convenience methods,
 <code class="docutils literal"><span class="pre">get_monopolar_channels</span></code> and <code class="docutils literal"><span class="pre">get_bipolar_pairs</span></code>, specifically for
 this purpose.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [3]:
+<span></span>In [6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">tal_reader</span> <span class="o">=</span> <span class="n">TalReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">rhino_root</span><span class="o">+</span><span class="s1">&#39;/data/eeg/BW001/tal/BW001_talLocs_database_bipol.mat&#39;</span><span class="p">)</span>
-<span class="n">channels</span> <span class="o">=</span> <span class="n">tal_reader</span><span class="o">.</span><span class="n">get_monopolar_channels</span><span class="p">()</span>
-<span class="n">channels</span>
+<span></span>tal_reader = TalReader(filename=rhino_root+&#39;/data/eeg/BW001/tal/BW001_talLocs_database_bipol.mat&#39;)
+channels = tal_reader.get_monopolar_channels()
+channels
 </pre></div>
 </div>
 </div>
@@ -463,7 +444,7 @@ bpTalStruct
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[3]:
+<span></span>Out[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
@@ -490,12 +471,12 @@ you add a buffer period, you should remove it afterwards with
 <p>All of these use time in seconds as their unit.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [4]:
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">eeg</span> <span class="o">=</span> <span class="n">EEGReader</span><span class="p">(</span><span class="n">events</span><span class="o">=</span><span class="n">events</span><span class="p">,</span><span class="n">channels</span><span class="o">=</span><span class="n">channels</span><span class="p">,</span><span class="n">start_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">end_time</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">eeg</span><span class="p">)</span>
+<span></span>eeg = EEGReader(events=events,channels=channels,start_time=0.0,end_time=1.0).read()
+print(eeg)
 </pre></div>
 </div>
 </div>
@@ -578,25 +559,25 @@ Attributes:
 xarray.DataArray. The DataArray class provides an interface for
 multi-dimensional arrays with labelled axes; the TimeSeriesX object adds
 some additional convenience methods.</p>
-<p>As an example of one might use a DataArray, let’s plot the average
+<p>As an example of one might use a DataArray, let&#8217;s plot the average
 voltage across all channels and events.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [5]:
+<span></span>In [8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eeg</span><span class="o">.</span><span class="n">time</span><span class="p">,</span><span class="n">eeg</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;channels&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">))</span>
+<span></span>plt.plot(eeg.time,eeg.mean(&#39;channels&#39;).mean(&#39;events&#39;))
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[5]:
+<span></span>Out[8]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
-<span></span>[&lt;matplotlib.lines.Line2D at 0x11a853e50&gt;]
+<span></span>[&lt;matplotlib.lines.Line2D at 0x1162bfad0&gt;]
 </pre></div>
 </div>
 </div>
@@ -609,14 +590,14 @@ voltage across all channels and events.</p>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [6]:
+<span></span>In [9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">eeg</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
-<span class="k">print</span>
-<span class="k">print</span>
-<span class="k">print</span><span class="p">(</span><span class="n">eeg</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<span></span>print(eeg.coords)
+print
+print
+print(eeg.attrs)
 </pre></div>
 </div>
 </div>
@@ -635,29 +616,29 @@ Coordinates:
 OrderedDict([(&#39;samplerate&#39;, 200.0), (&#39;gain&#39;, 1.0)])
 </pre></div></div>
 </div>
-<p>“Data Coordinates” are marked with a star, and correspond to axes of our
+<p>&#8220;Data Coordinates&#8221; are marked with a star, and correspond to axes of our
 array. Other coordinates are not aligned to the data, but do persist
 under certain transformations.</p>
 <p>With ECoG data, it is usually more informative to look not at the
 voltage at each electrode, but at the difference across adjacent
 electrodes. The MonopolarToBipolarMapper class takes a list of which
 pairs are adjacent to each other, and returns a TimeSeriesX with the
-‘channels’ dimension replaced by ‘bipolar_pairs’.</p>
+&#8216;channels&#8217; dimension replaced by &#8216;bipolar_pairs&#8217;.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [7]:
+<span></span>In [10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">bipolar_pairs</span> <span class="o">=</span> <span class="n">tal_reader</span><span class="o">.</span><span class="n">get_bipolar_pairs</span><span class="p">()</span>
-<span class="n">bipolar_eeg</span><span class="o">=</span> <span class="n">MonopolarToBipolarMapper</span><span class="p">(</span><span class="n">time_series</span><span class="o">=</span><span class="n">eeg</span><span class="p">,</span><span class="n">bipolar_pairs</span><span class="o">=</span><span class="n">bipolar_pairs</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">()</span>
-<span class="n">bipolar_eeg</span>
+<span></span>bipolar_pairs = tal_reader.get_bipolar_pairs()
+bipolar_eeg= MonopolarToBipolarMapper(time_series=eeg,bipolar_pairs=bipolar_pairs).filter()
+bipolar_eeg
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[7]:
+<span></span>Out[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
@@ -723,21 +704,21 @@ Attributes:
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [8]:
+<span></span>In [11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">time</span><span class="p">,</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;bipolar_pairs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">))</span>
+<span></span>plt.plot(bipolar_eeg.time,bipolar_eeg.mean(&#39;bipolar_pairs&#39;).mean(&#39;events&#39;))
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[8]:
+<span></span>Out[11]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
-<span></span>[&lt;matplotlib.lines.Line2D at 0x12a4b6690&gt;]
+<span></span>[&lt;matplotlib.lines.Line2D at 0x11596a7d0&gt;]
 </pre></div>
 </div>
 </div>
@@ -750,24 +731,24 @@ Attributes:
 </div>
 <p>We can use the <code class="docutils literal"><span class="pre">sel</span></code> method of DataArrays to filter the timeseries
 under consideration; for example, we can only look at the events of type
-“WORD”:</p>
+&#8220;WORD&#8221;:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [9]:
+<span></span>In [12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">time</span><span class="p">,</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">events</span><span class="o">=</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;WORD&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;bipolar_pairs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">))</span>
+<span></span>plt.plot(bipolar_eeg.time,bipolar_eeg.sel(events=bipolar_eeg.events.data[&#39;type&#39;]==&#39;WORD&#39;).mean(&#39;bipolar_pairs&#39;).mean(&#39;events&#39;))
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[9]:
+<span></span>Out[12]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
-<span></span>[&lt;matplotlib.lines.Line2D at 0x12a5a5e10&gt;]
+<span></span>[&lt;matplotlib.lines.Line2D at 0x1162587d0&gt;]
 </pre></div>
 </div>
 </div>
@@ -778,26 +759,26 @@ under consideration; for example, we can only look at the events of type
 <img alt="../_images/examples_eeg_15_1.png" src="../_images/examples_eeg_15_1.png" />
 </div>
 </div>
-<p>This data seems like it’s heavily contaminated by 60 Hz line noise. We
+<p>This data seems like it&#8217;s heavily contaminated by 60 Hz line noise. We
 can use the <code class="docutils literal"><span class="pre">filtered</span></code> method to filter out the 60 Hz component of the
 signal:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [10]:
+<span></span>In [13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">time</span><span class="p">,</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">filtered</span><span class="p">([</span><span class="mf">58.</span><span class="p">,</span><span class="mf">62.</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;bipolar_pairs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">))</span>
+<span></span>plt.plot(bipolar_eeg.time,bipolar_eeg.filtered([58.,62.]).mean(&#39;bipolar_pairs&#39;).mean(&#39;events&#39;))
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[10]:
+<span></span>Out[13]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
-<span></span>[&lt;matplotlib.lines.Line2D at 0x112850590&gt;]
+<span></span>[&lt;matplotlib.lines.Line2D at 0x116b1cbd0&gt;]
 </pre></div>
 </div>
 </div>
@@ -812,21 +793,21 @@ signal:</p>
 <div class="section" id="2.-RAM-data-(new)">
 <h2>2. RAM data (new)<a class="headerlink" href="#2.-RAM-data-(new)" title="Permalink to this headline">¶</a></h2>
 <p>The new system for storing the RAM data stores the information about
-each subject’s electrode montage in a file <code class="docutils literal"><span class="pre">pairs.json</span></code>, which we can
+each subject&#8217;s electrode montage in a file <code class="docutils literal"><span class="pre">pairs.json</span></code>, which we can
 find using a JsonIndexReader</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [11]:
+<span></span>In [14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">ptsa.data.readers.IndexReader</span> <span class="kn">import</span> <span class="n">JsonIndexReader</span>
-<span class="n">jr</span> <span class="o">=</span> <span class="n">JsonIndexReader</span><span class="p">(</span><span class="n">rhino_root</span><span class="o">+</span><span class="s1">&#39;/protocols/r1.json&#39;</span><span class="p">)</span>
-<span class="n">events</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
-    <span class="p">[</span><span class="n">BaseEventReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">jr</span><span class="o">.</span><span class="n">aggregate_values</span><span class="p">(</span><span class="s1">&#39;task_events&#39;</span><span class="p">,</span><span class="n">subject</span><span class="o">=</span><span class="s1">&#39;R1111M&#39;</span><span class="p">,</span><span class="n">experiment</span><span class="o">=</span><span class="s1">&#39;FR1&#39;</span><span class="p">)]</span>
-<span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">)</span>
-<span class="n">words</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="n">events</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;WORD&#39;</span><span class="p">]</span>
-<span class="n">pairs_path</span> <span class="o">=</span> <span class="n">jr</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s1">&#39;pairs&#39;</span><span class="p">,</span><span class="n">subject</span><span class="o">=</span><span class="s1">&#39;R1111M&#39;</span><span class="p">,</span><span class="n">experiment</span><span class="o">=</span><span class="s1">&#39;FR1&#39;</span><span class="p">)</span>
+<span></span>from ptsa.data.readers.IndexReader import JsonIndexReader
+jr = JsonIndexReader(rhino_root+&#39;/protocols/r1.json&#39;)
+events = np.concatenate(
+    [BaseEventReader(filename=f).read() for f in jr.aggregate_values(&#39;task_events&#39;,subject=&#39;R1111M&#39;,experiment=&#39;FR1&#39;)]
+).view(np.recarray)
+words = events[events.type==&#39;WORD&#39;]
+pairs_path = jr.get_value(&#39;pairs&#39;,subject=&#39;R1111M&#39;,experiment=&#39;FR1&#39;)
 </pre></div>
 </div>
 </div>
@@ -834,20 +815,20 @@ find using a JsonIndexReader</p>
 use that to load the list of channels and the list of bipolar pairs</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [13]:
+<span></span>In [15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">tal_reader</span> <span class="o">=</span> <span class="n">TalReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">pairs_path</span><span class="p">)</span>
-<span class="n">channels</span> <span class="o">=</span> <span class="n">tal_reader</span><span class="o">.</span><span class="n">get_monopolar_channels</span><span class="p">()</span>
-<span class="n">eeg</span> <span class="o">=</span> <span class="n">EEGReader</span><span class="p">(</span><span class="n">events</span><span class="o">=</span><span class="n">words</span><span class="p">,</span><span class="n">channels</span><span class="o">=</span><span class="n">channels</span><span class="p">,</span><span class="n">start_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">end_time</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">eeg</span><span class="o">.</span><span class="n">coords</span>
+<span></span>tal_reader = TalReader(filename=pairs_path)
+channels = tal_reader.get_monopolar_channels()
+eeg = EEGReader(events=words,channels=channels,start_time=0.0,end_time=1.0).read()
+eeg.coords
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[13]:
+<span></span>Out[15]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
@@ -865,9 +846,9 @@ use that to load the list of channels and the list of bipolar pairs</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">bipolar_eeg</span><span class="o">=</span> <span class="n">MonopolarToBipolarMapper</span><span class="p">(</span><span class="n">time_series</span><span class="o">=</span><span class="n">eeg</span><span class="p">,</span><span class="n">bipolar_pairs</span><span class="o">=</span><span class="n">tal_reader</span><span class="o">.</span><span class="n">get_bipolar_pairs</span><span class="p">())</span><span class="o">.</span><span class="n">filter</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">time</span><span class="p">,</span><span class="n">bipolar_eeg</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;bipolar_pairs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">))</span>
+<span></span>bipolar_eeg= MonopolarToBipolarMapper(time_series=eeg,bipolar_pairs=tal_reader.get_bipolar_pairs()).filter()
+print(bipolar_eeg.coords)
+plt.plot(bipolar_eeg.time,bipolar_eeg.mean(&#39;bipolar_pairs&#39;).mean(&#39;events&#39;))
 </pre></div>
 </div>
 </div>
@@ -889,7 +870,7 @@ Coordinates:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
-<span></span>[&lt;matplotlib.lines.Line2D at 0x1125359d0&gt;]
+<span></span>[&lt;matplotlib.lines.Line2D at 0x1167ecd10&gt;]
 </pre></div>
 </div>
 </div>
@@ -903,38 +884,43 @@ Coordinates:
 </div>
 <div class="section" id="3.-LTPFR/LTPFR2">
 <h2>3. LTPFR/LTPFR2<a class="headerlink" href="#3.-LTPFR/LTPFR2" title="Permalink to this headline">¶</a></h2>
+<p>There are two main differences between reading scalp data and reading
+ECoG data. The first is that scalp data are usually rereferenced so that
+the data are relative to the average over all electrodes. This helps to
+eliminate artifacts due to muscle movement. To load the referenced data,
+we pass set the parameter <code class="docutils literal"><span class="pre">use_reref_eeg</span></code> to <code class="docutils literal"><span class="pre">True</span></code> when reading the
+events.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">events</span> <span class="o">=</span> <span class="n">BaseEventReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">rhino_root</span><span class="o">+</span><span class="s1">&#39;/data/eeg/scalp/ltp/ltpFR2/behavioral/events/events_all_LTP093.mat&#39;</span><span class="p">,</span><span class="n">use_reref_eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">common_root</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">words</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="n">events</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;WORD&#39;</span><span class="p">]</span>
+<span></span>events = BaseEventReader(filename=rhino_root+&#39;/data/eeg/scalp/ltp/ltpFR2/behavioral/events/events_all_LTP093.mat&#39;,
+                         use_reref_eeg=True,common_root=&#39;data&#39;).read()
+words = events[events.type==&#39;WORD&#39;]
 </pre></div>
 </div>
 </div>
-<p>The main difference between reading scalp EEG data and ECoG data is that
-the scalp experiments have a fixed set of electrodes. We therefore
+<p>The second difference between reading scalp EEG data and ECoG data is
+that the scalp experiments have a fixed set of electrodes. We therefore
 construct the array of channel labels ourselves, rather than reading it
 with a TalReader.</p>
 <p>The scalp EEG in the CML lab has 128 channels, but for purposes of speed
-we’ll only load a few of them.</p>
+we&#8217;ll only load a few of them.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [57]:
+<span></span>In [ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">channels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;{:03}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">)])</span>
-<span class="n">channels</span>
+<span></span>channels = np.array([&#39;{:03}&#39;.format(x) for x in range(20,30)])
+channels
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[57]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
 <span></span>array([&#39;020&#39;, &#39;021&#39;, &#39;022&#39;, &#39;023&#39;, &#39;024&#39;, &#39;025&#39;, &#39;026&#39;, &#39;027&#39;, &#39;028&#39;, &#39;029&#39;],
@@ -942,32 +928,15 @@ we’ll only load a few of them.</p>
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [62]:
+<span></span>In [ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">eeg</span> <span class="o">=</span> <span class="n">EEGReader</span><span class="p">(</span><span class="n">events</span><span class="o">=</span><span class="n">words</span><span class="p">,</span><span class="n">channels</span><span class="o">=</span><span class="n">channels</span><span class="p">,</span><span class="n">start_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">end_time</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eeg</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;channels&#39;</span><span class="p">))</span>
+<span></span>eeg = EEGReader(events=words,channels=channels,start_time=0.0,end_time=1.0).read()
+plt.plot(eeg.mean(&#39;events&#39;).mean(&#39;channels&#39;))
 </pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[62]:
-</pre></div>
-</div>
-<div class="output_area highlight-none"><div class="highlight"><pre>
-<span></span>[&lt;matplotlib.lines.Line2D at 0x113863650&gt;]
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_eeg_27_1.png" src="../_images/examples_eeg_27_1.png" />
 </div>
 </div>
 </div>
@@ -1017,7 +986,7 @@ we’ll only load a few of them.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.0',
+            VERSION:'1.1.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1027,7 +996,7 @@ we’ll only load a few of them.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

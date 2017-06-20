@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pyFR Demo &mdash; PTSA 1.1.0 documentation</title>
+  <title>pyFR Demo &mdash; PTSA 1.1.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PTSA 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="PTSA 1.1.1 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="Classifier time series" href="classifier_time_series.html"/>
         <link rel="prev" title="BEHAVIORAL ANALYSES" href="events.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.1.0
+                1.1.1
               </div>
             
           
@@ -106,7 +106,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filtering Time Series</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changelog</a></li>
 </ul>
 
             
@@ -374,10 +373,10 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">ptsa.data.readers</span> <span class="kn">import</span> <span class="n">BaseEventReader</span>
-<span class="kn">from</span> <span class="nn">ptsa.data.readers.TalReader</span> <span class="kn">import</span> <span class="n">TalReader</span>
-<span class="kn">from</span> <span class="nn">ptsa.data.readers</span> <span class="kn">import</span> <span class="n">EEGReader</span>
+<span></span>import sys
+from ptsa.data.readers import BaseEventReader
+from ptsa.data.readers.TalReader import TalReader
+from ptsa.data.readers import EEGReader
 </pre></div>
 </div>
 </div>
@@ -399,9 +398,9 @@ function that returns a Numpy recarray with behavioral events</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">ev_path</span> <span class="o">=</span> <span class="s1">&#39;/Volumes/rhino_root/data/events/pyFR/TJ011_events.mat&#39;</span>
-<span class="n">base_e_reader</span> <span class="o">=</span> <span class="n">BaseEventReader</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ev_path</span><span class="p">,</span> <span class="n">eliminate_events_with_no_eeg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">base_events</span> <span class="o">=</span> <span class="n">base_e_reader</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span></span>ev_path = &#39;/Volumes/rhino_root/data/events/pyFR/TJ011_events.mat&#39;
+base_e_reader = BaseEventReader(filename=ev_path, eliminate_events_with_no_eeg=True)
+base_events = base_e_reader.read()
 </pre></div>
 </div>
 </div>
@@ -411,20 +410,20 @@ function that returns a Numpy recarray with behavioral events</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">base_events</span> <span class="o">=</span> <span class="n">base_events</span><span class="p">[</span><span class="n">base_events</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;WORD&#39;</span><span class="p">]</span>
+<span></span>base_events = base_events[base_events.type == &#39;WORD&#39;]
 </pre></div>
 </div>
 </div>
 <p>To examine the conten of the event recarray we can print its columns one
 by one and do some filtering that matches our criteria. For example
-let’s print all the columns of the recarray</p>
+let&#8217;s print all the columns of the recarray</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">base_events</span><span class="o">.</span><span class="n">dtype</span>
+<span></span>base_events.dtype
 </pre></div>
 </div>
 </div>
@@ -439,7 +438,7 @@ let’s print all the columns of the recarray</p>
 </div>
 </div>
 <p>Above you can see a summary of the fields that are available in the
-record array. Let’s print first 2 events to see actual content of the
+record array. Let&#8217;s print first 2 events to see actual content of the
 record array:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
@@ -447,7 +446,7 @@ record array:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">base_events</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span></span>base_events[:2]
 </pre></div>
 </div>
 </div>
@@ -466,7 +465,7 @@ record array:</p>
 <p>As you can tell from the output above each event contains subject,
 session number, list number, serial position number, type of the event
 (here all events are WORD events because we have performed filtering
-base_events = base_events[base_events.type == ‘WORD’]) etc…. Let’s
+base_events = base_events[base_events.type == &#8216;WORD&#8217;]) etc.... Let&#8217;s
 see what words were displayed on the screen:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
@@ -474,7 +473,7 @@ see what words were displayed on the screen:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">base_events</span><span class="p">[</span><span class="s2">&quot;item&quot;</span><span class="p">][:</span><span class="mi">20</span><span class="p">]</span>
+<span></span>base_events[&quot;item&quot;][:20]
 </pre></div>
 </div>
 </div>
@@ -491,9 +490,9 @@ see what words were displayed on the screen:</p>
 </pre></div>
 </div>
 </div>
-<p>base_events[“item”] is an array of all the words displayed during
+<p>base_events[&#8220;item&#8221;] is an array of all the words displayed during
 entire experiment. Since I wanted to display only first 20 words I used
-slicing operation base_events[“item”][:20]</p>
+slicing operation base_events[&#8220;item&#8221;][:20]</p>
 <p>Notice that if we want to display e.g. serialpos column we can use the
 following syntax:</p>
 <div class="nbinput docutils container">
@@ -502,7 +501,7 @@ following syntax:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">base_events</span><span class="o">.</span><span class="n">serialpos</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
+<span></span>base_events.serialpos[:20]
 </pre></div>
 </div>
 </div>
@@ -524,7 +523,7 @@ following syntax:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">base_events</span><span class="p">[</span><span class="s2">&quot;serialpos&quot;</span><span class="p">][:</span><span class="mi">20</span><span class="p">]</span>
+<span></span>base_events[&quot;serialpos&quot;][:20]
 </pre></div>
 </div>
 </div>
@@ -547,7 +546,7 @@ trouble:</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2"><div class="highlight"><pre>
-<span></span><span class="n">base_events</span><span class="o">.</span><span class="n">item</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
+<span></span>base_events.item[:20]
 </pre></div>
 </div>
 </div>
@@ -567,7 +566,7 @@ trouble:</p>
 <p>This happens because <em>item</em> is built-in name of of the funuction
 belonging to recarray and by typing <em>base_events.item</em> you are
 referring to the function not the column of the array. Thus to access
-words on the screen via <em>item</em> you have to use base_events[“item”][:20]</p>
+words on the screen via <em>item</em> you have to use base_events[&#8220;item&#8221;][:20]</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -624,7 +623,7 @@ words on the screen via <em>item</em> you have to use base_events[“item”][:2
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.0',
+            VERSION:'1.1.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -634,7 +633,7 @@ words on the screen via <em>item</em> you have to use base_events[“item”][:2
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
