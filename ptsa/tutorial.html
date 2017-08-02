@@ -253,27 +253,27 @@ is identical to the syntax you use to create <code class="docutils literal"><spa
 function (learn it now , you will really need it later). Our TimeSeriesX object is simply a container that
 stores <code class="docutils literal"><span class="pre">data</span></code> and provides some very handy axis annotation capabilities. If you print the content of the <code class="docutils literal"><span class="pre">ts</span></code> on
 the screen this is what you will get:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;xray.TimeSeriesX <span class="o">(</span>time: 25<span class="o">)</span>&gt;
-array<span class="o">([</span>  0. ,   0.5,   1. ,   1.5,   2. ,   2.5,   3. ,   3.5,   4. ,
-         4.5,   5. ,   5.5,   6. ,   6.5,   7. ,   7.5,   8. ,   8.5,
-         9. ,   9.5,  10. ,  10.5,  11. ,  11.5,  12. <span class="o">])</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;xray.TimeSeriesX <span class="o">(</span>time: <span class="m">25</span><span class="o">)</span>&gt;
+array<span class="o">([</span>  <span class="m">0</span>. ,   <span class="m">0</span>.5,   <span class="m">1</span>. ,   <span class="m">1</span>.5,   <span class="m">2</span>. ,   <span class="m">2</span>.5,   <span class="m">3</span>. ,   <span class="m">3</span>.5,   <span class="m">4</span>. ,
+         <span class="m">4</span>.5,   <span class="m">5</span>. ,   <span class="m">5</span>.5,   <span class="m">6</span>. ,   <span class="m">6</span>.5,   <span class="m">7</span>. ,   <span class="m">7</span>.5,   <span class="m">8</span>. ,   <span class="m">8</span>.5,
+         <span class="m">9</span>. ,   <span class="m">9</span>.5,  <span class="m">10</span>. ,  <span class="m">10</span>.5,  <span class="m">11</span>. ,  <span class="m">11</span>.5,  <span class="m">12</span>. <span class="o">])</span>
 Coordinates:
   * <span class="nb">time</span>     <span class="o">(</span><span class="nb">time</span><span class="o">)</span> int64 <span class="m">0</span> <span class="m">2</span> <span class="m">4</span> <span class="m">6</span> <span class="m">8</span> <span class="m">10</span> <span class="m">12</span> <span class="m">14</span> <span class="m">16</span> <span class="m">18</span> <span class="m">20</span> <span class="m">22</span> <span class="m">24</span> <span class="m">26</span> <span class="m">28</span> <span class="m">30</span> <span class="m">32</span> <span class="m">34</span> ...
 </pre></div>
 </div>
 <p>As you can tell not only is the <code class="docutils literal"><span class="pre">data</span></code> stored in the <code class="docutils literal"><span class="pre">timeSeriesX</span></code> array but we also created <code class="docutils literal"><span class="pre">time</span></code> axis. notice
 that the <code class="docutils literal"><span class="pre">time</span></code> axis is not a series of consecutive integers as in plain array but actually contains
-&#8220;actual&#8221; times</p>
+“actual” times</p>
 <p>If, for example we arenterested interested in getting time series data for times between 2 and 8 seconds
 (yes, I implicitely assumed the time units are seconds) we can issue the following command</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="p">[(</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span><span class="o">&gt;=</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span><span class="o">&lt;=</span><span class="mi">8</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>and the output will be</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;xray.TimeSeriesX <span class="o">(</span>time: 4<span class="o">)</span>&gt;
-array<span class="o">([</span> 0.5,  1. ,  1.5,  2. <span class="o">])</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;xray.TimeSeriesX <span class="o">(</span>time: <span class="m">4</span><span class="o">)</span>&gt;
+array<span class="o">([</span> <span class="m">0</span>.5,  <span class="m">1</span>. ,  <span class="m">1</span>.5,  <span class="m">2</span>. <span class="o">])</span>
 Coordinates:
-  * <span class="nb">time</span>     <span class="o">(</span><span class="nb">time</span><span class="o">)</span> int64 <span class="m">2</span> <span class="m">4</span> <span class="m">6</span> 8
+  * <span class="nb">time</span>     <span class="o">(</span><span class="nb">time</span><span class="o">)</span> int64 <span class="m">2</span> <span class="m">4</span> <span class="m">6</span> <span class="m">8</span>
 </pre></div>
 </div>
 <p>We can assign part of the time series in a single call :</p>
@@ -340,7 +340,7 @@ included entry for the <code class="docutils literal"><span class="pre">bp_pairs
 </pre></div>
 </div>
 <p>Notice that this time we assigned <code class="docutils literal"><span class="pre">bp_pairs</span></code> in the constructor of the <code class="docutils literal"><span class="pre">ts1</span></code></p>
-<p>Let us &#8220;glue&#8221; together <code class="docutils literal"><span class="pre">ts</span></code> and <code class="docutils literal"><span class="pre">ts1</span></code> using <code class="docutils literal"><span class="pre">concat</span></code> function from <code class="docutils literal"><span class="pre">xarray</span></code>.</p>
+<p>Let us “glue” together <code class="docutils literal"><span class="pre">ts</span></code> and <code class="docutils literal"><span class="pre">ts1</span></code> using <code class="docutils literal"><span class="pre">concat</span></code> function from <code class="docutils literal"><span class="pre">xarray</span></code>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">tsm</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ts</span><span class="p">,</span><span class="n">ts1</span><span class="p">],</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;bp_pairs&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -529,7 +529,7 @@ that <code class="docutils literal"><span class="pre">xarray.DataArray</span></c
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

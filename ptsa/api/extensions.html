@@ -38,7 +38,7 @@
     <link rel="top" title="PTSA 1.1.1 documentation" href="../index.html"/>
         <link rel="up" title="API Reference" href="index.html"/>
         <link rel="next" title="Development guidelines" href="../development.html"/>
-        <link rel="prev" title="ptsa.data" href="data.html"/> 
+        <link rel="prev" title="Filters" href="data/filters.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -222,7 +222,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong><strong>,</strong><strong>Y</strong><strong>,</strong><strong>Z</strong> &#8211; np.array[np.complex]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong><strong>,</strong><strong>Y</strong><strong>,</strong><strong>Z</strong> – np.array[np.complex]</td>
 </tr>
 </tbody>
 </table>
@@ -238,8 +238,8 @@ The computation is performed in parallel over <code class="docutils literal"><sp
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong><strong>,</strong><strong>Y</strong><strong>,</strong><strong>Z</strong> &#8211; np.array[np.complex]</li>
-<li><strong>n_threads</strong> &#8211; int</li>
+<li><strong>X</strong><strong>,</strong><strong>Y</strong><strong>,</strong><strong>Z</strong> – np.array[np.complex]</li>
+<li><strong>n_threads</strong> – int</li>
 </ul>
 </td>
 </tr>
@@ -280,10 +280,10 @@ when partitioned into two classes, and stores the results in fstat.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>phase_diffs</strong> &#8211; A matrix of phase differences</li>
-<li><strong>classes</strong> &#8211; A boolean vector indicating which observation belongs in which class. Should be the same length as
+<li><strong>phase_diffs</strong> – A matrix of phase differences</li>
+<li><strong>classes</strong> – A boolean vector indicating which observation belongs in which class. Should be the same length as
 the first dimension of <code class="docutils literal"><span class="pre">phase_diffs</span></code></li>
-<li><strong>f_stat</strong> &#8211; An empty vector the same length as the second dimension of <code class="docutils literal"><span class="pre">phase_diffs</span></code></li>
+<li><strong>f_stat</strong> – An empty vector the same length as the second dimension of <code class="docutils literal"><span class="pre">phase_diffs</span></code></li>
 </ul>
 </td>
 </tr>
@@ -310,7 +310,7 @@ the first dimension of <code class="docutils literal"><span class="pre">phase_di
 <div class="section" id="ptsa-extensions-morlet">
 <h2>ptsa.extensions.morlet<a class="headerlink" href="#ptsa-extensions-morlet" title="Permalink to this headline">¶</a></h2>
 <p>Low-level functions for quickly computing Morlet wavelet decompositions.
-<code class="xref py py-mod docutils literal"><span class="pre">MorletWaveletFilterCpp</span></code> provides a higher-level interface for these same functions.</p>
+<a class="reference internal" href="data/filters.html#ptsa.data.filters.MorletWaveletFilterCpp" title="ptsa.data.filters.MorletWaveletFilterCpp"><code class="xref py py-mod docutils literal"><span class="pre">MorletWaveletFilterCpp</span></code></a> provides a higher-level interface for these same functions.</p>
 </div>
 </div>
 
@@ -327,7 +327,7 @@ the first dimension of <code class="docutils literal"><span class="pre">phase_di
         <a href="../development.html" class="btn btn-neutral float-right" title="Development guidelines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="data.html" class="btn btn-neutral" title="ptsa.data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="data/filters.html" class="btn btn-neutral" title="Filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -368,7 +368,7 @@ the first dimension of <code class="docutils literal"><span class="pre">phase_di
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
