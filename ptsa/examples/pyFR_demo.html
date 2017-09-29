@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pyFR Demo &mdash; PTSA 1.1.2 documentation</title>
+  <title>pyFR Demo &mdash; PTSA 1.1.3 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PTSA 1.1.2 documentation" href="../index.html"/>
+    <link rel="top" title="PTSA 1.1.3 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="Classifier time series" href="classifier_time_series.html"/>
         <link rel="prev" title="1. pyFR" href="events_SPC.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.1.2
+                1.1.3
               </div>
             
           
@@ -418,7 +418,7 @@ base_events = base_e_reader.read()
 </div>
 <p>To examine the conten of the event recarray we can print its columns one
 by one and do some filtering that matches our criteria. For example
-let’s print all the columns of the recarray</p>
+let&#8217;s print all the columns of the recarray</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [17]:
@@ -440,7 +440,7 @@ let’s print all the columns of the recarray</p>
 </div>
 </div>
 <p>Above you can see a summary of the fields that are available in the
-record array. Let’s print first 2 events to see actual content of the
+record array. Let&#8217;s print first 2 events to see actual content of the
 record array:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
@@ -467,7 +467,7 @@ record array:</p>
 <p>As you can tell from the output above each event contains subject,
 session number, list number, serial position number, type of the event
 (here all events are WORD events because we have performed filtering
-base_events = base_events[base_events.type == ‘WORD’]) etc…. Let’s
+base_events = base_events[base_events.type == &#8216;WORD&#8217;]) etc.... Let&#8217;s
 see what words were displayed on the screen:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
@@ -492,9 +492,9 @@ see what words were displayed on the screen:</p>
 </pre></div>
 </div>
 </div>
-<p>base_events[“item”] is an array of all the words displayed during
+<p>base_events[&#8220;item&#8221;] is an array of all the words displayed during
 entire experiment. Since I wanted to display only first 20 words I used
-slicing operation base_events[“item”][:20]</p>
+slicing operation base_events[&#8220;item&#8221;][:20]</p>
 <p>Notice that if we want to display e.g. serialpos column we can use the
 following syntax:</p>
 <div class="nbinput docutils container">
@@ -568,7 +568,7 @@ trouble:</p>
 <p>This happens because <em>item</em> is built-in name of of the funuction
 belonging to recarray and by typing <em>base_events.item</em> you are
 referring to the function not the column of the array. Thus to access
-words on the screen via <em>item</em> you have to use base_events[“item”][:20]</p>
+words on the screen via <em>item</em> you have to use base_events[&#8220;item&#8221;][:20]</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -625,7 +625,7 @@ words on the screen via <em>item</em> you have to use base_events[“item”][:2
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.2',
+            VERSION:'1.1.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -635,7 +635,7 @@ words on the screen via <em>item</em> you have to use base_events[“item”][:2
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

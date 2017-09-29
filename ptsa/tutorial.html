@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PTSA Tutorial &mdash; PTSA 1.1.2 documentation</title>
+  <title>PTSA Tutorial &mdash; PTSA 1.1.3 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="PTSA 1.1.2 documentation" href="index.html"/>
+    <link rel="top" title="PTSA 1.1.3 documentation" href="index.html"/>
         <link rel="next" title="Examples" href="examples/index.html"/>
         <link rel="prev" title="Installation" href="installation.html"/> 
 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.1.2
+                1.1.3
               </div>
             
           
@@ -263,7 +263,7 @@ Coordinates:
 </div>
 <p>As you can tell not only is the <code class="docutils literal"><span class="pre">data</span></code> stored in the <code class="docutils literal"><span class="pre">timeSeriesX</span></code> array but we also created <code class="docutils literal"><span class="pre">time</span></code> axis. notice
 that the <code class="docutils literal"><span class="pre">time</span></code> axis is not a series of consecutive integers as in plain array but actually contains
-“actual” times</p>
+&#8220;actual&#8221; times</p>
 <p>If, for example we arenterested interested in getting time series data for times between 2 and 8 seconds
 (yes, I implicitely assumed the time units are seconds) we can issue the following command</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="p">[(</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span><span class="o">&gt;=</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span><span class="o">&lt;=</span><span class="mi">8</span><span class="p">)]</span>
@@ -340,7 +340,7 @@ included entry for the <code class="docutils literal"><span class="pre">bp_pairs
 </pre></div>
 </div>
 <p>Notice that this time we assigned <code class="docutils literal"><span class="pre">bp_pairs</span></code> in the constructor of the <code class="docutils literal"><span class="pre">ts1</span></code></p>
-<p>Let us “glue” together <code class="docutils literal"><span class="pre">ts</span></code> and <code class="docutils literal"><span class="pre">ts1</span></code> using <code class="docutils literal"><span class="pre">concat</span></code> function from <code class="docutils literal"><span class="pre">xarray</span></code>.</p>
+<p>Let us &#8220;glue&#8221; together <code class="docutils literal"><span class="pre">ts</span></code> and <code class="docutils literal"><span class="pre">ts1</span></code> using <code class="docutils literal"><span class="pre">concat</span></code> function from <code class="docutils literal"><span class="pre">xarray</span></code>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">tsm</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ts</span><span class="p">,</span><span class="n">ts1</span><span class="p">],</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;bp_pairs&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -519,7 +519,7 @@ that <code class="docutils literal"><span class="pre">xarray.DataArray</span></c
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.1.2',
+            VERSION:'1.1.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -529,7 +529,7 @@ that <code class="docutils literal"><span class="pre">xarray.DataArray</span></c
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

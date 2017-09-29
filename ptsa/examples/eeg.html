@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reading EEG Data from events &mdash; PTSA 1.1.2 documentation</title>
+  <title>Reading EEG Data from events &mdash; PTSA 1.1.3 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="PTSA 1.1.2 documentation" href="../index.html"/>
+    <link rel="top" title="PTSA 1.1.3 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="1. pyFR" href="events_SPC.html"/>
         <link rel="prev" title="Basic TimeSeriesX functionality" href="timeseriesx.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.1.2
+                1.1.3
               </div>
             
           
@@ -414,12 +414,12 @@ words = events[events.type==&#39;WORD&#39;]
 </pre></div>
 </div>
 </div>
-<p>Next, we use the TalReader class to get information about the subject’s
+<p>Next, we use the TalReader class to get information about the subject&#8217;s
 electrodes.</p>
 <p>Like the other readers, the TalReader class has a <code class="docutils literal"><span class="pre">read()</span></code> method that
 will return a record array; this one contains information about the
-location of each electrode. However, we’re really only interested in two
-things: each electrode’s number, and which electrodes are adjacent to
+location of each electrode. However, we&#8217;re really only interested in two
+things: each electrode&#8217;s number, and which electrodes are adjacent to
 each other. Therefore, TalReader has two convenience methods,
 <code class="docutils literal"><span class="pre">get_monopolar_channels</span></code> and <code class="docutils literal"><span class="pre">get_bipolar_pairs</span></code>, specifically for
 this purpose.</p>
@@ -561,7 +561,7 @@ Attributes:
 xarray.DataArray. The DataArray class provides an interface for
 multi-dimensional arrays with labelled axes; the TimeSeriesX object adds
 some additional convenience methods.</p>
-<p>As an example of one might use a DataArray, let’s plot the average
+<p>As an example of one might use a DataArray, let&#8217;s plot the average
 voltage across all channels and events.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
@@ -618,14 +618,14 @@ Coordinates:
 OrderedDict([(&#39;samplerate&#39;, 200.0), (&#39;gain&#39;, 1.0)])
 </pre></div></div>
 </div>
-<p>“Data Coordinates” are marked with a star, and correspond to axes of our
+<p>&#8220;Data Coordinates&#8221; are marked with a star, and correspond to axes of our
 array. Other coordinates are not aligned to the data, but do persist
 under certain transformations.</p>
 <p>With ECoG data, it is usually more informative to look not at the
 voltage at each electrode, but at the difference across adjacent
 electrodes. The MonopolarToBipolarMapper class takes a list of which
 pairs are adjacent to each other, and returns a TimeSeriesX with the
-‘channels’ dimension replaced by ‘bipolar_pairs’.</p>
+&#8216;channels&#8217; dimension replaced by &#8216;bipolar_pairs&#8217;.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [10]:
@@ -733,7 +733,7 @@ Attributes:
 </div>
 <p>We can use the <code class="docutils literal"><span class="pre">sel</span></code> method of DataArrays to filter the timeseries
 under consideration; for example, we can only look at the events of type
-“WORD”:</p>
+&#8220;WORD&#8221;:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [12]:
@@ -761,7 +761,7 @@ under consideration; for example, we can only look at the events of type
 <img alt="../_images/examples_eeg_15_1.png" src="../_images/examples_eeg_15_1.png" />
 </div>
 </div>
-<p>This data seems like it’s heavily contaminated by 60 Hz line noise. We
+<p>This data seems like it&#8217;s heavily contaminated by 60 Hz line noise. We
 can use the <code class="docutils literal"><span class="pre">filtered</span></code> method to filter out the 60 Hz component of the
 signal:</p>
 <div class="nbinput docutils container">
@@ -795,7 +795,7 @@ signal:</p>
 <div class="section" id="2.-RAM-data-(new)">
 <h2>2. RAM data (new)<a class="headerlink" href="#2.-RAM-data-(new)" title="Permalink to this headline">¶</a></h2>
 <p>The new system for storing the RAM data stores the information about
-each subject’s electrode montage in a file <code class="docutils literal"><span class="pre">pairs.json</span></code>, which we can
+each subject&#8217;s electrode montage in a file <code class="docutils literal"><span class="pre">pairs.json</span></code>, which we can
 find using a JsonIndexReader</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
@@ -909,7 +909,7 @@ that the scalp experiments have a fixed set of electrodes. We therefore
 construct the array of channel labels ourselves, rather than reading it
 with a TalReader.</p>
 <p>The scalp EEG in the CML lab has 128 channels, but for purposes of speed
-we’ll only load a few of them.</p>
+we&#8217;ll only load a few of them.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -988,7 +988,7 @@ plt.plot(eeg.mean(&#39;events&#39;).mean(&#39;channels&#39;))
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.2',
+            VERSION:'1.1.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -998,7 +998,7 @@ plt.plot(eeg.mean(&#39;events&#39;).mean(&#39;channels&#39;))
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

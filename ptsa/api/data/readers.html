@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Readers &mdash; PTSA 1.1.2 documentation</title>
+  <title>Readers &mdash; PTSA 1.1.3 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="PTSA 1.1.2 documentation" href="../../index.html"/>
+    <link rel="top" title="PTSA 1.1.3 documentation" href="../../index.html"/>
         <link rel="up" title="ptsa.data" href="../data.html"/>
         <link rel="next" title="Filters" href="filters.html"/>
         <link rel="prev" title="TimeSeriesX" href="timeseriesx.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                1.1.2
+                1.1.3
               </div>
             
           
@@ -230,19 +230,19 @@ and implements a <code class="docutils literal"><span class="pre">read()</span><
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
 <tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<em>str</em>) – path to event file</li>
-<li><strong>eliminate_events_with_no_eeg</strong> (<em>bool</em>) – flag to automatically remove events with no eegfile (default True)</li>
-<li><strong>eliminate_nans</strong> (<em>bool</em>) – flag to automatically replace nans in the event structs with -999 (default True)</li>
-<li><strong>use_reref_eeg</strong> (<em>bool</em>) – flag that changes eegfiles to point reref eegs. Default is False
+<li><strong>filename</strong> (<em>str</em>) &#8211; path to event file</li>
+<li><strong>eliminate_events_with_no_eeg</strong> (<em>bool</em>) &#8211; flag to automatically remove events with no eegfile (default True)</li>
+<li><strong>eliminate_nans</strong> (<em>bool</em>) &#8211; flag to automatically replace nans in the event structs with -999 (default True)</li>
+<li><strong>use_reref_eeg</strong> (<em>bool</em>) &#8211; flag that changes eegfiles to point reref eegs. Default is False
 and eegs read are nonreref ones</li>
-<li><strong>normalize_eeg_path</strong> (<em>bool</em>) – flag that determines if ‘data1’, ‘data2’, etc… in eeg path will
-get converted to ‘data’. The flag is True by default meaning all
-‘data1’, ‘data2’, etc… are converted to ‘data’</li>
-<li><strong>common_root</strong> (<em>str</em>) – partial path to root events folder e.g. if you events are placed in
-/data/events/RAM_FR1 the path should be ‘data/events’. If your
-events are placed in the ‘/data/scalp_events/catFR’ the common root
-should be ‘data/scalp_events’. Note that you do not include opening
-‘/’ in the common_root</li>
+<li><strong>normalize_eeg_path</strong> (<em>bool</em>) &#8211; flag that determines if &#8216;data1&#8217;, &#8216;data2&#8217;, etc... in eeg path will
+get converted to &#8216;data&#8217;. The flag is True by default meaning all
+&#8216;data1&#8217;, &#8216;data2&#8217;, etc... are converted to &#8216;data&#8217;</li>
+<li><strong>common_root</strong> (<em>str</em>) &#8211; partial path to root events folder e.g. if you events are placed in
+/data/events/RAM_FR1 the path should be &#8216;data/events&#8217;. If your
+events are placed in the &#8216;/data/scalp_events/catFR&#8217; the common root
+should be &#8216;data/scalp_events&#8217;. Note that you do not include opening
+&#8216;/&#8217; in the common_root</li>
 </ul>
 </td>
 </tr>
@@ -252,6 +252,12 @@ should be ‘data/scalp_events’. Note that you do not include opening
 <dt id="ptsa.data.readers.BaseEventReader.as_dataframe">
 <code class="descname">as_dataframe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ptsa.data.readers.BaseEventReader.as_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read events and return as a <code class="xref py py-class docutils literal"><span class="pre">pd.DataFrame</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This drops the <code class="docutils literal"><span class="pre">stim_params</span></code> field presently as it is not scalar
+in the current event structure scheme and causes issues when trying
+to convert to a <code class="xref py py-class docutils literal"><span class="pre">pd.DataFrame</span></code>.</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -261,8 +267,8 @@ should be ‘data/scalp_events’. Note that you do not include opening
 <p>data on rhino database is mounted as /data
 copying rhino /data structure to another directory will cause all files in data have new prefix
 example:
-self._filename=’/Users/m/data/events/R1060M_events.mat’
-prefix is ‘/Users/m’
+self._filename=&#8217;/Users/m/data/events/R1060M_events.mat&#8217;
+prefix is &#8216;/Users/m&#8217;
 we use find_dir_prefix to determine prefix based on common_root in path with and without prefix</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -277,7 +283,7 @@ we use find_dir_prefix to determine prefix based on common_root in path with and
 <dl class="method">
 <dt id="ptsa.data.readers.BaseEventReader.modify_eeg_path">
 <code class="descname">modify_eeg_path</code><span class="sig-paren">(</span><em>events</em><span class="sig-paren">)</span><a class="headerlink" href="#ptsa.data.readers.BaseEventReader.modify_eeg_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Replaces ‘eeg.reref’ with ‘eeg.noreref’ in eegfile path
+<dd><p>Replaces &#8216;eeg.reref&#8217; with &#8216;eeg.noreref&#8217; in eegfile path
 :param events: np.recarray representing events. One of hte field of this array should be eegfile
 :return:None</p>
 </dd></dl>
@@ -285,7 +291,7 @@ we use find_dir_prefix to determine prefix based on common_root in path with and
 <dl class="method">
 <dt id="ptsa.data.readers.BaseEventReader.normalize_paths">
 <code class="descname">normalize_paths</code><span class="sig-paren">(</span><em>events</em><span class="sig-paren">)</span><a class="headerlink" href="#ptsa.data.readers.BaseEventReader.normalize_paths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Replaces data1, data2 etc… in the eegfile column of the events with data
+<dd><p>Replaces data1, data2 etc... in the eegfile column of the events with data
 :param events: np.recarray representing events. One of hte field of this array should be eegfile
 :return: None</p>
 </dd></dl>
@@ -296,7 +302,7 @@ we use find_dir_prefix to determine prefix based on common_root in path with and
 <dd><p>Reads Matlab event file and returns corresponging np.recarray. Path to the eegfile is changed
 w.r.t original Matlab code to account for the following:
 1. /data dir of the database might have been mounted under different mount point e.g. /Users/m/data
-2. use_reref_eeg is set to True in which case we replaces ‘eeg.reref’ with ‘eeg.noreref’ in eegfile path</p>
+2. use_reref_eeg is set to True in which case we replaces &#8216;eeg.reref&#8217; with &#8216;eeg.noreref&#8217; in eegfile path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -313,24 +319,24 @@ w.r.t original Matlab code to account for the following:
 <dt id="ptsa.data.readers.CMLEventReader">
 <em class="property">class </em><code class="descclassname">ptsa.data.readers.</code><code class="descname">CMLEventReader</code><span class="sig-paren">(</span><em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#ptsa.data.readers.CMLEventReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Event reader that returns original PTSA Events object with attached
-rawbinwrappers – objects that know how to read eeg binary data</p>
+rawbinwrappers &#8211; objects that know how to read eeg binary data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
 <tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<em>str</em>) – path to event file</li>
-<li><strong>eliminate_events_with_no_eeg</strong> (<em>bool</em>) – flag to automatically remove events with no eegfile (default True)</li>
-<li><strong>eliminate_nans</strong> (<em>bool</em>) – flag to automatically replace nans in the event structs with -999
+<li><strong>filename</strong> (<em>str</em>) &#8211; path to event file</li>
+<li><strong>eliminate_events_with_no_eeg</strong> (<em>bool</em>) &#8211; flag to automatically remove events with no eegfile (default True)</li>
+<li><strong>eliminate_nans</strong> (<em>bool</em>) &#8211; flag to automatically replace nans in the event structs with -999
 (default True)</li>
-<li><strong>eeg_fname_search_pattern</strong> (<em>str</em>) – pattern in the eeg filename to search for in order to repalce it with
+<li><strong>eeg_fname_search_pattern</strong> (<em>str</em>) &#8211; pattern in the eeg filename to search for in order to repalce it with
 eeg_fname_replace_pattern</li>
-<li><strong>eeg_fname_replace_pattern</strong> (<em>str</em>) – replace pattern for eeg filename. It will replace all occurrences
-specified by “eeg_fname_replace_pattern”</li>
-<li><strong>normalize_eeg_path</strong> (<em>bool</em>) – flag that determines if ‘data1’, ‘data2’, etc… in eeg path will get
-converted to ‘data’. The flag is False by default meaning all ‘data1’,
-‘data2’, etc… are converted to ‘data’</li>
+<li><strong>eeg_fname_replace_pattern</strong> (<em>str</em>) &#8211; replace pattern for eeg filename. It will replace all occurrences
+specified by &#8220;eeg_fname_replace_pattern&#8221;</li>
+<li><strong>normalize_eeg_path</strong> (<em>bool</em>) &#8211; flag that determines if &#8216;data1&#8217;, &#8216;data2&#8217;, etc... in eeg path will get
+converted to &#8216;data&#8217;. The flag is False by default meaning all &#8216;data1&#8217;,
+&#8216;data2&#8217;, etc... are converted to &#8216;data&#8217;</li>
 </ul>
 </td>
 </tr>
@@ -339,14 +345,14 @@ converted to ‘data’. The flag is False by default meaning all ‘data1’,
 <dl class="method">
 <dt id="ptsa.data.readers.CMLEventReader.modify_eeg_path">
 <code class="descname">modify_eeg_path</code><span class="sig-paren">(</span><em>events</em><span class="sig-paren">)</span><a class="headerlink" href="#ptsa.data.readers.CMLEventReader.modify_eeg_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Replaces search pattern (self.eeg_fname_search_patter’) with replace
+<dd><p>Replaces search pattern (self.eeg_fname_search_patter&#8217;) with replace
 pattern (self.eeg_fname_replace_pattern) in every eegfile entry in the
 events recarray</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>events</strong> (<em>np.recarray</em>) – representing events. One of the field of this array should be
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>events</strong> (<em>np.recarray</em>) &#8211; representing events. One of the field of this array should be
 eegfile</td>
 </tr>
 </tbody>
@@ -366,12 +372,12 @@ or can read entire session if session_dataroot is non empty.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
 <tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first simple">
-<li><strong>channels</strong> (<em>np.ndarray</em>) – numpy array of channel labels</li>
-<li><strong>start_time</strong> (<em>float</em>) – read start offset in seconds w.r.t to the eegeffset specified in the events recarray</li>
-<li><strong>end_time</strong> – read end offset in seconds w.r.t to the eegeffset specified in the events recarray</li>
-<li><strong>buffer_time</strong> (<em>float</em>) – extra buffer in seconds (subtracted from start read and added to end read)</li>
-<li><strong>events</strong> (<em>np.recarray</em>) – numpy recarray representing Events</li>
-<li><strong>session_dataroot</strong> (<em>str</em>) – path to session dataroot. When set the reader will read the entire session</li>
+<li><strong>channels</strong> (<em>np.ndarray</em>) &#8211; numpy array of channel labels</li>
+<li><strong>start_time</strong> (<em>float</em>) &#8211; read start offset in seconds w.r.t to the eegeffset specified in the events recarray</li>
+<li><strong>end_time</strong> &#8211; read end offset in seconds w.r.t to the eegeffset specified in the events recarray</li>
+<li><strong>buffer_time</strong> (<em>float</em>) &#8211; extra buffer in seconds (subtracted from start read and added to end read)</li>
+<li><strong>events</strong> (<em>np.recarray</em>) &#8211; numpy recarray representing Events</li>
+<li><strong>session_dataroot</strong> (<em>str</em>) &#8211; path to session dataroot. When set the reader will read the entire session</li>
 </ul>
 </td>
 </tr>
@@ -393,12 +399,18 @@ to start_offset, end_offset, buffer_offset expressed as integers indicating numb
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dataroot</strong> – core name of the eeg datafile</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dataroot</strong> &#8211; core name of the eeg datafile</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">tuple of 3 {int} - start_offset, end_offset, buffer_offset</td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ptsa.data.readers.EEGReader.events">
+<code class="descname">events</code><a class="headerlink" href="#ptsa.data.readers.EEGReader.events" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 </dd></dl>
 
 <dl class="method">
@@ -442,7 +454,7 @@ to start_offset, end_offset, buffer_offset expressed as integers indicating numb
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">numpy recarray where each record has two fields ‘ch0’ and ‘ch1’ storing  channel labels.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">numpy recarray where each record has two fields &#8216;ch0&#8217; and &#8216;ch1&#8217; storing  channel labels.</td>
 </tr>
 </tbody>
 </table>
@@ -509,7 +521,7 @@ to start_offset, end_offset, buffer_offset expressed as integers indicating numb
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.1.2',
+            VERSION:'1.1.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -519,7 +531,7 @@ to start_offset, end_offset, buffer_offset expressed as integers indicating numb
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
